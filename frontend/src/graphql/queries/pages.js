@@ -20,12 +20,14 @@ export const GET_PAGE = gql`
 			link
 			id
 			title
+
+			# BLOCKS
 			blocks {
 				name
 				order
 				__typename
 
-				# Feature Cards Block
+				# FEATURE CARDS COMPONENTS
 				... on CreateBlockFeatureCardsBlock {
 					attributes {
 						... on CreateBlockFeatureCardsBlockAttributes {
@@ -34,28 +36,30 @@ export const GET_PAGE = gql`
 					}
 				}
 
-				# Card Gallery Block
+				# CARD GALLERY COMPONENT
 				... on CreateBlockCardGalleryBlock {
+					attributes {
+						... on CreateBlockCardGalleryBlockAttributes {
+							cardsPerRow
+							header
+							footer
+							backgroundColor
+							customBackgroundColor
+						}
+					}
 					innerBlocks {
 						__typename
-						... on CoreColumnsBlock {
-							innerBlocks {
-								__typename
-								... on CoreColumnBlock {
-									innerBlocks {
-										__typename
-										... on CreateBlockCardGalleryCardBlock {
-											attributes {
-												... on CreateBlockCardGalleryCardBlockAttributes {
-													className
-													mediaType
-													image
-													video
-													content
-												}
-											}
-										}
-									}
+
+						# CARD GALLERY ITEM
+						... on CreateBlockCardGalleryCardBlock {
+							name
+							order
+							attributes {
+								... on CreateBlockCardGalleryCardBlockAttributes {
+									mediaType
+									image
+									video
+									content
 								}
 							}
 						}

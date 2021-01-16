@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { nanoid } from "nanoid";
 
 import fetcher from "@/graphql/fetcher";
 import { GET_PAGE, LIST_PAGES } from "@/graphql/queries/pages";
@@ -18,21 +19,22 @@ const Page = ({ data: initialData }) => {
 
 	return (
 		<main>
-			{data.getPage.blocks.map((block, idx) => {
+			{data.getPage.blocks.map((block) => {
 				{
 					/* Return section based on block types */
 				}
+				console.log(`#${block.order} -----> ${block.name}`);
 				switch (block.__typename) {
 					case "CreateBlockFeatureCardsBlock": {
-						return <FeatureCards key={idx} block={block} />;
+						return <FeatureCards key={nanoid()} block={block} />;
 					}
 
 					case "CreateBlockCardGalleryBlock": {
-						return <CardGallery key={idx} block={block} />;
+						return <CardGallery key={nanoid()} block={block} />;
 					}
 
 					default: {
-						return <p key={idx}>Block type "{block.__typename}" not handled.</p>;
+						return <p key={nanoid()}>Block type "{block.__typename}" not handled.</p>;
 					}
 				}
 			})}

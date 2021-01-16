@@ -1,7 +1,55 @@
 .card-gallery {
 	&__inner {
 		@include container(true);
+	}
 
+	// SECTION HEADER
+	&__header {
+		text-align: center;
+		margin-bottom: 4rem;
+		display: flex;
+		flex-direction: column;
+
+		& > h2 {
+			margin-bottom: 1rem;
+		}
+
+		& > div {
+			font-size: 1.5rem;
+			line-height: 1.5;
+
+			& > a {
+				color: #4678ee;
+				position: relative;
+				width: max-content;
+				margin: 0.5rem 0;
+			}
+		}
+	}
+
+	// SECTION FOOTER
+	&__footer {
+		text-align: center;
+		margin-top: 4rem;
+		display: flex;
+		flex-direction: column;
+
+		& > div {
+			font-size: 1.5rem;
+			line-height: 1.5;
+			margin-bottom: 2rem;
+
+			& > a {
+				color: #4678ee;
+				position: relative;
+				width: max-content;
+				margin: 0.5rem 0;
+			}
+		}
+	}
+
+	// SECTION BODY
+	&__body {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 3rem;
@@ -15,11 +63,13 @@
 		}
 	}
 
+	// CARD ITEM
 	&__item {
 		border: 0.5px solid #dae3f9;
 		box-shadow: 0px 11px 30px rgba(154, 161, 177, 0.1);
 		border-radius: 9px;
 		overflow: hidden;
+		background-color: #fff;
 
 		&:hover {
 			.card-gallery__content {
@@ -34,6 +84,7 @@
 		}
 	}
 
+	// CARD ITEM MEDIA
 	&__media {
 		height: 20rem;
 		position: relative;
@@ -47,6 +98,7 @@
 		object-fit: cover;
 	}
 
+	// CARD ITEM CONTENT
 	&__content {
 		padding: 2rem;
 

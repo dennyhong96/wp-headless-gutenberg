@@ -634,20 +634,12 @@ function Edit(props) {
       inner_blocks = _useSelect.inner_blocks,
       blocks = _useSelect.blocks,
       block = _useSelect.block,
-      attrs = _useSelect.attrs;
+      attrs = _useSelect.attrs; // console.log({ attrs });
+  // console.log({ block });
+  // console.log({ blocks });
+  // console.log({ inner_blocks });
 
-  console.log({
-    attrs: attrs
-  });
-  console.log({
-    block: block
-  });
-  console.log({
-    blocks: blocks
-  });
-  console.log({
-    inner_blocks: inner_blocks
-  });
+
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("section", {
     className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(className, (_classNames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classNames, "".concat(className, "--3"), cardsPerRow === 3), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classNames, "".concat(className, "--4"), cardsPerRow === 4), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classNames, backgroundColor.class, !!backgroundColor.class), _classNames)),
     style: {

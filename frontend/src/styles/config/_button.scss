@@ -1,0 +1,26 @@
+// CTA BUTTON
+.cta-btn {
+	align-self: center;
+	width: max-content;
+	border-radius: 3px;
+	padding: 1.5rem 2.5rem;
+	text-transform: uppercase;
+	transition: 0.3s ease-out;
+
+	&--filled {
+		color: #fff;
+		background-color: #4678ee;
+		&:hover {
+			background-color: lighten(#4678ee, 5);
+		}
+	}
+
+	&--outlined {
+		color: #4678ee;
+		border: 1px solid #4678ee;
+		&:hover {
+			color: #fff;
+			background-color: #4678ee;
+		}
+	}
+}

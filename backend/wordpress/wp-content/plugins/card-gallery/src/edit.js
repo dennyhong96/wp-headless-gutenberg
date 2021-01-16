@@ -60,10 +60,10 @@ function Edit(props) {
 		block: select("core/block-editor").getBlock(clientId),
 		attrs: select("core/block-editor").getBlockAttributes(clientId),
 	}));
-	console.log({ attrs });
-	console.log({ block });
-	console.log({ blocks });
-	console.log({ inner_blocks });
+	// console.log({ attrs });
+	// console.log({ block });
+	// console.log({ blocks });
+	// console.log({ inner_blocks });
 
 	return (
 		<Fragment>
