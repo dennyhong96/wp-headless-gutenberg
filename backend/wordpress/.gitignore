@@ -113,3 +113,4 @@ Thumbs.db
 # End Custom blocks
 
 !wp-content/themes/headless
+!wp-content/uploads
