@@ -1,10 +1,13 @@
 import Image from "next/image";
+
 import { nanoid } from "nanoid";
 import stripTags from "striptags";
 import classNames from "classnames";
 
+import useColor from "@/hooks/useColor";
 import sanitize from "@/utils/sanitize";
-import Link from "next/link";
+import SectionHeader from "../common/sectionHeader";
+import SectionFooter from "../common/sectionFooter";
 
 const CardGallery = ({ block }) => {
 	let {
@@ -16,18 +19,7 @@ const CardGallery = ({ block }) => {
 	header = header ? JSON.parse(header) : null;
 	footer = footer ? JSON.parse(footer) : null;
 
-	const colorMap = {
-		white: "#fff",
-		light_blue: "#f1f4f9",
-		light_brown: "#f8f5f0",
-	};
-
-	const bgColor =
-		backgroundColor && !customBackgroundColor
-			? colorMap[backgroundColor]
-			: !backgroundColor && customBackgroundColor
-			? customBackgroundColor
-			: undefined;
+	const { color: bgColor } = useColor({ backgroundColor, customBackgroundColor });
 
 	return (
 		<section
@@ -39,12 +31,7 @@ const CardGallery = ({ block }) => {
 		>
 			<div className="card-gallery__inner">
 				{/* SECTION HEADER */}
-				{header.enableHeader && (
-					<div className="card-gallery__header">
-						<h2>{header.heading}</h2>
-						<div>{header.content}</div>
-					</div>
-				)}
+				<SectionHeader header={header} />
 
 				{/* SECTION BODY */}
 				<div className="card-gallery__body">
@@ -121,31 +108,7 @@ const CardGallery = ({ block }) => {
 				</div>
 
 				{/* SECTION FOOTER */}
-				{footer.enableFooter && (
-					<div className="card-gallery__footer">
-						<div>{footer.footerText}</div>
-						{footer.callToAction.text && footer.callToAction.url && (
-							<Link href={footer.callToAction.url} passHref>
-								<a
-									className={classNames("cta-btn", {
-										"cta-btn--filled": footer.callToAction.style === "filled",
-										"cta-btn--outlined":
-											footer.callToAction.style === "outlined",
-									})}
-									target={classNames("", {
-										_blank: footer.callToAction.targetBlank,
-									})}
-									rel={classNames("", {
-										"noopener noreferrer": footer.callToAction.targetBlank,
-										nofollow: footer.callToAction.noFollow,
-									})}
-								>
-									{footer.callToAction.text}
-								</a>
-							</Link>
-						)}
-					</div>
-				)}
+				<SectionFooter footer={footer} />
 			</div>
 		</section>
 	);

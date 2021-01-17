@@ -9,7 +9,7 @@ const useInitialSWR = (key, fetcher, config = {}) => {
 		if (initialData) {
 			mutate(initialData, false);
 		}
-	}, [key]);
+	}, [key, initialData, mutate]);
 
 	return {
 		mutate,

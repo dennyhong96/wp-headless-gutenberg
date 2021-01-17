@@ -3,51 +3,6 @@
 		@include container(true);
 	}
 
-	// SECTION HEADER
-	&__header {
-		text-align: center;
-		margin-bottom: 4rem;
-		display: flex;
-		flex-direction: column;
-
-		& > h2 {
-			margin-bottom: 1rem;
-		}
-
-		& > div {
-			font-size: 1.5rem;
-			line-height: 1.5;
-
-			& > a {
-				color: #4678ee;
-				position: relative;
-				width: max-content;
-				margin: 0.5rem 0;
-			}
-		}
-	}
-
-	// SECTION FOOTER
-	&__footer {
-		text-align: center;
-		margin-top: 4rem;
-		display: flex;
-		flex-direction: column;
-
-		& > div {
-			font-size: 1.5rem;
-			line-height: 1.5;
-			margin-bottom: 2rem;
-
-			& > a {
-				color: #4678ee;
-				position: relative;
-				width: max-content;
-				margin: 0.5rem 0;
-			}
-		}
-	}
-
 	// SECTION BODY
 	&__body {
 		display: grid;
@@ -133,7 +88,7 @@
 					height: 1px;
 					width: 0;
 					background-color: #4678ee;
-					transition: 0.3s ease-out;
+					transition: width 0.3s ease-out;
 				}
 			}
 		}

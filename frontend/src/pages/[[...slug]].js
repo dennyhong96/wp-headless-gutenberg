@@ -4,15 +4,15 @@ import { nanoid } from "nanoid";
 import fetcher from "@/graphql/fetcher";
 import { GET_PAGE, LIST_PAGES } from "@/graphql/queries/pages";
 import FeatureCards from "@/components/sections/featureCards";
-import useInitialSWR from "@/hooks/useInitialSWR";
 import CardGallery from "@/components/sections/cardGallery";
+import useSWR from "swr";
 
 const Page = ({ data: initialData }) => {
 	const router = useRouter();
 	const uri = router.query?.slug?.join("/") ?? "/";
-	const { data, error } = useInitialSWR([GET_PAGE, JSON.stringify({ uri })], fetcher, {
-		initialData,
-	});
+
+	// Optional client side update
+	const { data, error } = useSWR([GET_PAGE, JSON.stringify({ uri })], fetcher, { initialData });
 
 	if (router.isFallback || !data) return <p>Loading...</p>;
 	if (error) console.error(error);
