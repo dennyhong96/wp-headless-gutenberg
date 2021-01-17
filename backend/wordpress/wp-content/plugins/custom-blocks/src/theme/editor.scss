@@ -1,10 +1,5 @@
-// URLInput style correction
-.block-editor-url-input__input {
-	border: 1px solid #ddd !important;
-}
-
-// Gutenberg color options
-// -- see editor-color-palette in functions.php
+// Theme color options
+// See block_color_setup in index.php
 $colors: (
 		white: #fff,
 	),
@@ -22,3 +17,18 @@ $colors: (
 		background-color: $color;
 	}
 }
+
+// URLInput style correction
+.block-editor-url-input__input {
+	border: 1px solid #ddd !important;
+}
+
+// Disable blocks margins
+.block-editor-block-list__layout.is-root-container {
+	& > .block-editor-block-list__block {
+		margin: 0;
+	}
+}
+
+//
+@import "lib/slick";
