@@ -107,10 +107,11 @@ Thumbs.db
 # add your own entries here
 !wp-content/mu-plugins/example-mu-plugin/
 
+!wp-content/themes/headless
+!wp-content/uploads
+
 # Custom blocks
 !wp-content/plugins/card-gallery
 !wp-content/plugins/feature-cards
+!wp-content/plugins/block-slider
 # End Custom blocks
-
-!wp-content/themes/headless
-!wp-content/uploads

@@ -6,8 +6,7 @@
 
 //  Cards container
 .wp-block-create-block-card-gallery {
-	padding: 1rem;
-	border: 1px solid #ddd;
+	padding: 3rem;
 
 	& > .block-editor-inner-blocks {
 		// Grid container
@@ -92,4 +91,9 @@ $colors: (
 	.has-#{$name}-background-color {
 		background-color: $color;
 	}
+}
+
+//
+.block-editor-block-list__block[data-type="create-block/card-gallery"] {
+	margin: 0;
 }
