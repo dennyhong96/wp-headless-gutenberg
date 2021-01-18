@@ -5,17 +5,23 @@ import fetcher from "@/graphql/fetcher";
 import { GET_PAGE, LIST_PAGES } from "@/graphql/queries/pages";
 import FeatureCards from "@/components/sections/featureCards";
 import CardGallery from "@/components/sections/cardGallery";
-import useSWR from "swr";
+import Slider from "@/components/sections/slider";
 
-const Page = ({ data: initialData }) => {
+const Page = ({ data }) => {
 	const router = useRouter();
-	const uri = router.query?.slug?.join("/") ?? "/";
 
-	// Optional client side update
-	const { data, error } = useSWR([GET_PAGE, JSON.stringify({ uri })], fetcher, { initialData });
+	console.log(data);
 
-	if (router.isFallback || !data) return <p>Loading...</p>;
-	if (error) console.error(error);
+	if (router.isFallback) return <p>Loading...</p>;
+	if (!data) return <p>Error...</p>;
+
+	const settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+	};
 
 	return (
 		<main>
@@ -31,6 +37,12 @@ const Page = ({ data: initialData }) => {
 
 					case "CreateBlockCardGalleryBlock": {
 						return <CardGallery key={nanoid()} block={block} />;
+					}
+
+					case "CreateBlockBlockSliderBlock": {
+						{
+							return <Slider key={nanoid()} block={block} />;
+						}
 					}
 
 					default: {

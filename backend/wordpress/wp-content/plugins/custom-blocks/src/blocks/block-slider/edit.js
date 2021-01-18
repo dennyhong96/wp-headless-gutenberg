@@ -5,12 +5,14 @@ import {
 	useBlockProps, // @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
 	RichText,
 	URLInput,
+	URLPopover,
 	InnerBlocks,
 	BlockControls,
 	InspectorControls,
 	PanelColorSettings,
 	withColors,
 	getColorClassName,
+	MediaUpload,
 } from "@wordpress/block-editor";
 import {
 	Button,
@@ -26,12 +28,14 @@ import {
 import { __ } from "@wordpress/i18n";
 
 import classNames from "classnames";
+import Slider from "react-slick";
 
 /**
  * Contain any CSS code that gets applied to the editor.
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import "./styles/editor.scss";
+import SlideEditor from "./components/SlideEditor";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -47,8 +51,10 @@ function Edit(props) {
 		className,
 		backgroundColor,
 		setBackgroundColor,
+		slideHeaderColor,
+		setSlideHeaderColor,
 	} = props;
-	const { cardsPerRow, header, footer } = attributes;
+	const { slides, enableSliderHeader, header, footer } = attributes;
 	const { enableHeader, heading, content } = header;
 	const { enableFooter, footerText, callToAction } = footer;
 
@@ -65,12 +71,131 @@ function Edit(props) {
 	// console.log({ blocks });
 	// console.log({ inner_blocks });
 
+	const [isUrlPopupOpen, setIsUrlPopupOpen] = useState(slides.map(() => false));
+	const [editingIdx, setEditingIdx] = useState(null);
+
+	const handleAddSlide = () => {
+		setAttributes({
+			slides: [
+				...slides,
+				{
+					header: { logo: {}, link: { url: "" } },
+					children: [{ title: "", text: "" }],
+				},
+			],
+		});
+	};
+
+	const handleDeleteSlide = (idx) => () => {
+		setAttributes({
+			slides: slides.filter((_, i) => i !== idx),
+		});
+	};
+
+	const handleSelectImage = (img) => {
+		setAttributes({
+			slides: slides.map((slide, i) =>
+				i === editingIdx
+					? {
+							...slide,
+							header: {
+								...slide.header,
+								logo: {
+									url: img.url,
+									alt: img.alt,
+								},
+							},
+					  }
+					: slide
+			),
+		});
+	};
+
+	const handleDeleteImage = () => {
+		setAttributes({
+			slides: slides.map((slide, i) =>
+				i === editingIdx
+					? {
+							...slide,
+							header: {
+								...slide.header,
+								logo: {
+									url: "",
+									alt: "",
+								},
+							},
+					  }
+					: slide
+			),
+		});
+	};
+
+	const setLink = (attr) => (val) => {
+		setAttributes({
+			slides: slides.map((slide, i) =>
+				i === editingIdx
+					? {
+							...slide,
+							header: {
+								...slide.header,
+								link: {
+									...slide.header.link,
+									[attr]: val,
+								},
+							},
+					  }
+					: slide
+			),
+		});
+	};
+
+	const setCard = (cardIdx, attr) => (val) => {
+		setAttributes({
+			slides: slides.map((slide, i) =>
+				i === editingIdx
+					? {
+							...slide,
+							children: slide.children.map((child, childIdx) =>
+								childIdx === cardIdx ? { ...child, [attr]: val } : child
+							),
+					  }
+					: slide
+			),
+		});
+	};
+
+	const handleAddCard = () => {
+		setAttributes({
+			slides: slides.map((slide, i) =>
+				i === editingIdx
+					? {
+							...slide,
+							children: [...slide.children, { title: "", text: "" }],
+					  }
+					: slide
+			),
+		});
+	};
+
+	const handleRemoveCard = (cardIdx) => () => {
+		setAttributes({
+			slides: slides.map((slide, i) =>
+				i === editingIdx
+					? {
+							...slide,
+							children: slide.children.filter(
+								(_, childIdx) => childIdx !== cardIdx
+							),
+					  }
+					: slide
+			),
+		});
+	};
+
 	return (
 		<Fragment>
 			<section
 				className={classNames(className, {
-					[`${className}--3`]: cardsPerRow === 3,
-					[`${className}--4`]: cardsPerRow === 4,
 					[backgroundColor.class]: !!backgroundColor.class,
 				})}
 				style={{
@@ -105,14 +230,145 @@ function Edit(props) {
 					</div>
 				)}
 
-				{/* CARDS */}
-				<InnerBlocks
-					allowedBlocks={["create-block/block-slider-slide"]}
-					template={[
-						["create-block/block-slider-slide", {}, []],
-						["create-block/block-slider-slide", {}, []],
-						["create-block/block-slider-slide", {}, []],
-					]}
+				<IconButton
+					icon="plus"
+					label="Add a slide at the end"
+					onClick={handleAddSlide}
+					style={{ display: "block", margin: "0 auto" }}
+				/>
+
+				{/* SLIDER ***************************************************************************************** */}
+				<div className={`${className}__body`}>
+					<Slider
+						beforeChange={(_, next) =>
+							(editingIdx || editingIdx === 0) && setEditingIdx(next)
+						}
+						dots={true}
+						infinite={true}
+						speed={500}
+						slidesToShow={1}
+						slidesToScroll={1}
+						nextArrow={<IconButton isSecondary icon="arrow-right-alt" />}
+						prevArrow={<IconButton isSecondary icon="arrow-left-alt" />}
+					>
+						{slides.map((slide, idx) => {
+							const {
+								header: { logo, link },
+								children,
+							} = slide;
+
+							return (
+								<div key={idx}>
+									{/* EDIT / DELETE BUTTON */}
+
+									<div style={{ margin: "0.25rem", display: "flex" }}>
+										<Button
+											style={{ marginRight: "1rem" }}
+											icon="edit"
+											onClick={
+												editingIdx || editingIdx === 0
+													? setEditingIdx.bind(this, null)
+													: setEditingIdx.bind(this, idx)
+											}
+										>
+											Edit slide
+										</Button>
+
+										{!(editingIdx || editingIdx === 0) && (
+											<Button
+												isDestructive
+												icon="trash"
+												onClick={handleDeleteSlide(idx)}
+											>
+												Delete slide
+											</Button>
+										)}
+									</div>
+
+									{/* HEADER */}
+									{enableSliderHeader && (
+										<div
+											style={{
+												display: "flex",
+												alignItems: "center",
+												border: "1px solid #ddd",
+												padding: "1rem",
+												marginBottom: "1rem",
+												backgroundColor: slideHeaderColor.class
+													? undefined
+													: slideHeaderColor.color,
+											}}
+											className={classNames("", {
+												[slideHeaderColor.class]: !!slideHeaderColor.class,
+											})}
+										>
+											{/* CARD MEDIA PREVIEW */}
+											{logo.url ? (
+												<img
+													src={logo.url}
+													alt={logo.alt}
+													width={100}
+													height="auto"
+												/>
+											) : (
+												<div
+													style={{
+														width: 100,
+														height: 75,
+														display: "flex",
+														alignItems: "center",
+														justifyContent: "center",
+														border: "1px solid #ddd",
+													}}
+												>
+													<small>Slide Logo</small>
+												</div>
+											)}
+
+											{/* Link */}
+											<a style={{ marginLeft: "2rem" }}>{link.text}</a>
+										</div>
+									)}
+
+									{/* BODY */}
+									<div
+										style={{
+											border: "1px solid #ddd",
+											padding: "1rem",
+											display: "grid",
+											gridTemplateColumns: "repeat(3,1fr)",
+											gap: "1rem",
+											marginBottom: "1rem",
+										}}
+									>
+										{children.map((child, idx) => (
+											<div
+												key={idx}
+												style={{ border: "1px solid #ddd", padding: "1rem" }}
+											>
+												<span>{child.title}</span>
+												<div dangerouslySetInnerHTML={{ __html: child.text }} />
+											</div>
+										))}
+									</div>
+								</div>
+							);
+						})}
+					</Slider>
+				</div>
+
+				{/* SLIDE EDITOR */}
+				<SlideEditor
+					editingIdx={editingIdx}
+					enableSliderHeader={enableSliderHeader}
+					handleAddCard={handleAddCard}
+					handleDeleteImage={handleDeleteImage}
+					handleRemoveCard={handleRemoveCard}
+					handleSelectImage={handleSelectImage}
+					setCard={setCard}
+					setLink={setLink}
+					slides={slides}
+					setEditingIdx={setEditingIdx}
 				/>
 
 				{/* Block Footer */}
@@ -158,6 +414,13 @@ function Edit(props) {
 							disableCustomColors: false,
 							clearable: true,
 						},
+						{
+							value: slideHeaderColor.color,
+							label: "Slide Header Color",
+							onChange: setSlideHeaderColor,
+							disableCustomColors: false,
+							clearable: true,
+						},
 					]}
 				/>
 
@@ -174,12 +437,10 @@ function Edit(props) {
 
 				{/* BODY SETTINGS */}
 				<PanelBody title="Block Body">
-					<RangeControl
-						label="Number of cards per row?"
-						value={cardsPerRow}
-						min={3}
-						max={4}
-						onChange={(val) => setAttributes({ cardsPerRow: val })}
+					<ToggleControl
+						label="Show Slide Header?"
+						checked={enableSliderHeader}
+						onChange={(val) => setAttributes({ enableSliderHeader: val })}
 					/>
 				</PanelBody>
 
@@ -267,4 +528,4 @@ function Edit(props) {
 	);
 }
 
-export default withColors("backgroundColor")(Edit);
+export default withColors("backgroundColor", "slideHeaderColor")(Edit);
