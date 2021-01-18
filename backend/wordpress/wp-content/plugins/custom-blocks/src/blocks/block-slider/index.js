@@ -22,7 +22,6 @@ import "./styles/style.scss";
  */
 import Edit from "./edit";
 import save from "./save";
-import "./innerBlocks/child";
 
 registerBlockType("create-block/block-slider", {
 	/**
@@ -48,6 +47,10 @@ registerBlockType("create-block/block-slider", {
 		backgroundColor: { type: "string" },
 		customBackgroundColor: { type: "string" },
 
+		// SLIDE HEADER COLOR
+		slideHeaderColor: { type: "string" },
+		customSlideHeaderColor: { type: "string" },
+
 		// BLOCK HEADER
 		header: {
 			type: "object",
@@ -59,9 +62,22 @@ registerBlockType("create-block/block-slider", {
 		},
 
 		// BLOCK BODY
-		cardsPerRow: {
-			type: "number",
-			default: 3,
+		enableSliderHeader: {
+			type: "boolean",
+			default: true,
+		},
+		slides: {
+			type: "array",
+			default: [
+				{
+					header: { logo: {}, link: { url: "", text: "Slide header link" } },
+					children: [{ title: "A card title", text: "Some text content..." }],
+				},
+				{
+					header: { logo: {}, link: { url: "", text: "" } },
+					children: [{ title: "", text: "" }],
+				},
+			],
 		},
 
 		// BLOCK FOOTER

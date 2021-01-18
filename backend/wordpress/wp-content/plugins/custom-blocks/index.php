@@ -109,3 +109,32 @@ function block_color_setup() {
 	) );
 }
 add_action( 'after_setup_theme', 'block_color_setup' );
+
+register_block_pattern(
+  'Homepage Pattern',
+  array(
+      'title'       => __( 'Homepage Pattern', 'custom-blocks' ),
+      'description' => _x( 'Two horizontal buttons, the left button is filled in, and the right button is outlined.', 'Block pattern description', 'my-plugin' ),
+      'content'     => '<!-- wp:create-block/card-gallery {"backgroundColor":"light_blue","header":{"enableHeader":true,"heading":"Card Gallery","content":"This is card gallery block"},"cardsPerRow":4,"footer":{"enableFooter":true,"footerText":"This is a section footer.","callToAction":{"text":"Request Demo","url":"http://localhost:8020/hello-world/","targetBlank":true,"noFollow":false,"style":"filled"}}} -->
+      <section class="wp-block-create-block-card-gallery"><!-- wp:create-block/card-gallery-card {"mediaType":"image","image":{"url":"http://localhost:8020/wp-content/uploads/2021/01/evan-wise-D99y38Na5Xo-unsplash-300x200.jpg","alt":"bbq","height":200,"width":300},"content":{"subtitle":"BBQ","title":"Nice BBQ","body":"This BBQ is nice!"}} -->
+      <div class="wp-block-create-block-card-gallery-card core/paragraph"></div>
+      <!-- /wp:create-block/card-gallery-card -->
+
+      <!-- wp:create-block/card-gallery-card {"mediaType":"video","video":{"url":"http://localhost:8020/wp-content/uploads/2021/01/Windsurfer-2-1.mp4","thumb":{"src":"http://localhost:8020/wp-includes/images/media/video.png","width":48,"height":64},"height":1080,"width":1920},"content":{"subtitle":"Ocean","title":"Nice Ocean","body":"This ocean is nice\u003cbr\u003eLook at that, wow!"}} -->
+      <div class="wp-block-create-block-card-gallery-card core/paragraph"></div>
+      <!-- /wp:create-block/card-gallery-card -->
+
+      <!-- wp:create-block/card-gallery-card {"mediaType":"image","image":{"url":"http://localhost:8020/wp-content/uploads/2021/01/wright-brand-bacon-Vs7xQTZG-Bk-unsplash-2-300x200.jpg","alt":"","height":200,"width":300},"content":{"subtitle":"","title":"Nice muffin","body":"This has a link.\u003cbr\u003e\u003ca href=\u0022http://localhost:8020/hello-world/\u0022 target=\u0022_blank\u0022 rel=\u0022noreferrer noopener nofollow\u0022\u003eHello world!\u003c/a\u003e"}} -->
+      <div class="wp-block-create-block-card-gallery-card core/paragraph"></div>
+      <!-- /wp:create-block/card-gallery-card -->
+
+      <!-- wp:create-block/card-gallery-card {"mediaType":"video","video":{"url":"http://localhost:8020/wp-content/uploads/2021/01/Paragliding-Into-The-Sunset-On-Muriwai-Beach-1.mp4","thumb":{"src":"http://localhost:8020/wp-includes/images/media/video.png","width":48,"height":64},"height":1080,"width":1920},"content":{"subtitle":"Gliding","title":"Look!","body":"Super dope!"}} -->
+      <div class="wp-block-create-block-card-gallery-card core/paragraph"></div>
+      <!-- /wp:create-block/card-gallery-card --></section>
+      <!-- /wp:create-block/card-gallery -->
+
+      <!-- wp:create-block/block-slider {"backgroundColor":"light_brown","slides":[{"header":{"logo":{"url":"http://localhost:8020/wp-content/uploads/2021/01/wright-brand-bacon-Vs7xQTZG-Bk-unsplash-2.jpg","alt":""},"link":{"url":"http://localhost:8020/hello-world/","text":"Slide header link","targetBlank":true}},"children":[{"title":"A card title","text":"Some text content..."},{"title":"Another One","text":"Hey"}]},{"header":{"logo":{},"link":{"url":"","text":""}},"children":[{"title":"","text":""}]}]} -->
+      <section class="wp-block-create-block-block-slider wp-block-create-block-card-gallery"></section>
+      <!-- /wp:create-block/block-slider -->',
+  )
+);

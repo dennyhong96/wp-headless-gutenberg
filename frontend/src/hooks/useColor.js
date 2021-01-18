@@ -4,15 +4,11 @@ const COLOR_MAP = {
 	light_brown: "#f8f5f0",
 };
 
-const useColor = ({ backgroundColor, customBackgroundColor }) => {
-	const color =
-		backgroundColor && !customBackgroundColor
-			? COLOR_MAP[backgroundColor]
-			: !backgroundColor && customBackgroundColor
-			? customBackgroundColor
-			: undefined;
+const useColor = ({ color, customColor }) => {
+	const hex =
+		color && !customColor ? COLOR_MAP[color] : !color && customColor ? customColor : undefined;
 
-	return { color };
+	return { color: hex };
 };
 
 export default useColor;
