@@ -12074,7 +12074,9 @@ function Edit(props) {
       clientId = props.clientId,
       className = props.className,
       backgroundColor = props.backgroundColor,
-      setBackgroundColor = props.setBackgroundColor;
+      setBackgroundColor = props.setBackgroundColor,
+      slideHeaderColor = props.slideHeaderColor,
+      setSlideHeaderColor = props.setSlideHeaderColor;
   var slides = attributes.slides,
       enableSliderHeader = attributes.enableSliderHeader,
       header = attributes.header,
@@ -12315,8 +12317,10 @@ function Edit(props) {
         alignItems: "center",
         border: "1px solid #ddd",
         padding: "1rem",
-        marginBottom: "1rem"
-      }
+        marginBottom: "1rem",
+        backgroundColor: slideHeaderColor.class ? undefined : slideHeaderColor.color
+      },
+      className: classnames__WEBPACK_IMPORTED_MODULE_9___default()("", _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, slideHeaderColor.class, !!slideHeaderColor.class))
     }, logo.url ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("img", {
       src: logo.url,
       alt: logo.alt,
@@ -12400,6 +12404,12 @@ function Edit(props) {
       value: backgroundColor.color,
       label: "Background Color",
       onChange: setBackgroundColor,
+      disableCustomColors: false,
+      clearable: true
+    }, {
+      value: slideHeaderColor.color,
+      label: "Slide Header Color",
+      onChange: setSlideHeaderColor,
       disableCustomColors: false,
       clearable: true
     }]
@@ -12506,7 +12516,7 @@ function Edit(props) {
   })))));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["withColors"])("backgroundColor")(Edit));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["withColors"])("backgroundColor", "slideHeaderColor")(Edit));
 
 /***/ }),
 
@@ -12578,6 +12588,13 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])("cre
       type: "string"
     },
     customBackgroundColor: {
+      type: "string"
+    },
+    // SLIDE HEADER COLOR
+    slideHeaderColor: {
+      type: "string"
+    },
+    customSlideHeaderColor: {
       type: "string"
     },
     // BLOCK HEADER

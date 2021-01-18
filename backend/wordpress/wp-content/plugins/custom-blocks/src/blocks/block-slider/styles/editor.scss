@@ -101,3 +101,23 @@
 
 .wp-block-create-block-block-slider-slide {
 }
+
+// SLIDE HEADER BACKGROUND COLOR
+// See block_color_setup in index.php
+$colors: (
+		white: #fff,
+	),
+	(light-blue, #f1f4f9), (light-brown, #f8f5f0);
+
+/* Color Options
+--------------------------------------------- */
+
+@each $name, $color in $colors {
+	.has-#{$name}-color {
+		color: $color;
+	}
+
+	.has-#{$name}-slide-header-color {
+		background-color: $color;
+	}
+}

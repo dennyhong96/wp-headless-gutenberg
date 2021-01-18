@@ -47,6 +47,10 @@ registerBlockType("create-block/block-slider", {
 		backgroundColor: { type: "string" },
 		customBackgroundColor: { type: "string" },
 
+		// SLIDE HEADER COLOR
+		slideHeaderColor: { type: "string" },
+		customSlideHeaderColor: { type: "string" },
+
 		// BLOCK HEADER
 		header: {
 			type: "object",

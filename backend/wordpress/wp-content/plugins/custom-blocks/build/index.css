@@ -130,6 +130,24 @@
   border: 1px solid #ddd;
   text-align: center;
 }
+
+/* Color Options
+--------------------------------------------- */
+.has-light-blue-color {
+  color: #f1f4f9;
+}
+
+.has-light-blue-slide-header-color {
+  background-color: #f1f4f9;
+}
+
+.has-light-brown-color {
+  color: #f8f5f0;
+}
+
+.has-light-brown-slide-header-color {
+  background-color: #f8f5f0;
+}
 /* Color Options
 --------------------------------------------- */
 .has-light-blue-color {

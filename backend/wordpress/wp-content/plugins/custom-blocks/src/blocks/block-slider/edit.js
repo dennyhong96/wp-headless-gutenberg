@@ -51,6 +51,8 @@ function Edit(props) {
 		className,
 		backgroundColor,
 		setBackgroundColor,
+		slideHeaderColor,
+		setSlideHeaderColor,
 	} = props;
 	const { slides, enableSliderHeader, header, footer } = attributes;
 	const { enableHeader, heading, content } = header;
@@ -292,7 +294,13 @@ function Edit(props) {
 												border: "1px solid #ddd",
 												padding: "1rem",
 												marginBottom: "1rem",
+												backgroundColor: slideHeaderColor.class
+													? undefined
+													: slideHeaderColor.color,
 											}}
+											className={classNames("", {
+												[slideHeaderColor.class]: !!slideHeaderColor.class,
+											})}
 										>
 											{/* CARD MEDIA PREVIEW */}
 											{logo.url ? (
@@ -406,6 +414,13 @@ function Edit(props) {
 							disableCustomColors: false,
 							clearable: true,
 						},
+						{
+							value: slideHeaderColor.color,
+							label: "Slide Header Color",
+							onChange: setSlideHeaderColor,
+							disableCustomColors: false,
+							clearable: true,
+						},
 					]}
 				/>
 
@@ -513,4 +528,4 @@ function Edit(props) {
 	);
 }
 
-export default withColors("backgroundColor")(Edit);
+export default withColors("backgroundColor", "slideHeaderColor")(Edit);

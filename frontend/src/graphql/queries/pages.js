@@ -76,6 +76,8 @@ export const GET_PAGE = gql`
 							footer
 							backgroundColor
 							customBackgroundColor
+							slideHeaderColor
+							customSlideHeaderColor
 						}
 					}
 				}

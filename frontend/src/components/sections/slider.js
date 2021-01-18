@@ -11,11 +11,13 @@ import { ArrowRight, SliderArrowLeft, SliderArrowRight } from "../icons";
 const Slider = ({ block }) => {
 	// SLICK SLIDER CONFIG
 	const sliderConfig = {
+		accessibility: true,
 		dots: true,
 		infinite: true,
 		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
+		adaptiveHeight: true,
 		arrows: true,
 		prevArrow: (
 			<button>
@@ -39,6 +41,8 @@ const Slider = ({ block }) => {
 	let {
 		backgroundColor,
 		customBackgroundColor,
+		slideHeaderColor,
+		customSlideHeaderColor,
 		enableSliderHeader,
 		footer,
 		header,
@@ -49,7 +53,15 @@ const Slider = ({ block }) => {
 	footer = footer ? JSON.parse(footer) : null;
 	slides = slides ? JSON.parse(slides) : null;
 
-	const { color: bgColor } = useColor({ backgroundColor, customBackgroundColor });
+	const { color: bgColor } = useColor({
+		color: backgroundColor,
+		customColor: customBackgroundColor,
+	});
+
+	const { color: slideHeaderHex } = useColor({
+		color: slideHeaderColor,
+		customColor: customSlideHeaderColor,
+	});
 
 	console.log({ slides });
 
@@ -68,7 +80,10 @@ const Slider = ({ block }) => {
 								<div className="slider__item-inner">
 									{/* SLIDER ITEM HEADER */}
 									{enableSliderHeader && (
-										<div className="slider__item-header">
+										<div
+											className="slider__item-header"
+											style={{ backgroundColor: slideHeaderHex }}
+										>
 											{/* LOGO */}
 											<img
 												src={slide.header.logo.url}

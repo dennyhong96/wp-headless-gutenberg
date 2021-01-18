@@ -19,7 +19,10 @@ const CardGallery = ({ block }) => {
 	header = header ? JSON.parse(header) : null;
 	footer = footer ? JSON.parse(footer) : null;
 
-	const { color: bgColor } = useColor({ backgroundColor, customBackgroundColor });
+	const { color: bgColor } = useColor({
+		color: backgroundColor,
+		customColor: customBackgroundColor,
+	});
 
 	return (
 		<section
