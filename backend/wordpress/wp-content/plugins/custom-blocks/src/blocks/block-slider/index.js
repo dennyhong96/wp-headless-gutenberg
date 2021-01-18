@@ -22,12 +22,6 @@ import "./styles/style.scss";
  */
 import Edit from "./edit";
 import save from "./save";
-import "./innerBlocks/child";
-
-//
-import Slider from "react-slick";
-import { useState } from "@wordpress/element";
-//
 
 registerBlockType("create-block/block-slider", {
 	/**
@@ -64,9 +58,22 @@ registerBlockType("create-block/block-slider", {
 		},
 
 		// BLOCK BODY
-		cardsPerRow: {
-			type: "number",
-			default: 3,
+		enableSliderHeader: {
+			type: "boolean",
+			default: true,
+		},
+		slides: {
+			type: "array",
+			default: [
+				{
+					header: { logo: {}, link: { url: "", text: "Slide header link" } },
+					children: [{ title: "A card title", text: "Some text content..." }],
+				},
+				{
+					header: { logo: {}, link: { url: "", text: "" } },
+					children: [{ title: "", text: "" }],
+				},
+			],
 		},
 
 		// BLOCK FOOTER
@@ -91,40 +98,7 @@ registerBlockType("create-block/block-slider", {
 		return { ...props, "data-align": "wide" };
 	},
 
-	// edit: Edit,
-	edit() {
-		return (
-			<div>
-				<h2> Single Item</h2>
-				<Slider
-					dots={true}
-					infinite={true}
-					speed={500}
-					slidesToShow={1}
-					slidesToScroll={1}
-				>
-					<div>
-						<h3>1</h3>
-					</div>
-					<div>
-						<h3>2</h3>
-					</div>
-					<div>
-						<h3>3</h3>
-					</div>
-					<div>
-						<h3>4</h3>
-					</div>
-					<div>
-						<h3>5</h3>
-					</div>
-					<div>
-						<h3>6</h3>
-					</div>
-				</Slider>
-			</div>
-		);
-	},
+	edit: Edit,
 
 	save,
 });

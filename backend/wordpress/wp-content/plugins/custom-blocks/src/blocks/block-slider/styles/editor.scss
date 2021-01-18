@@ -7,6 +7,96 @@
 //  Cards container
 .wp-block-create-block-block-slider {
 	padding: 3rem;
+
+	&__header {
+		padding: 1rem;
+		border: 1px solid #ddd;
+		text-align: center;
+	}
+
+	&__body {
+		padding: 1rem;
+		border: 1px solid #ddd;
+		background: #fff;
+		margin-bottom: 2rem;
+
+		.slick-slider {
+			// arrow
+			.slick-arrow {
+				display: block;
+				position: absolute;
+				z-index: 10;
+				border-radius: 100px;
+				outline: none;
+				border: none;
+				box-shadow: 0 0 0 1px rgba(#007cba, 1);
+				display: flex !important;
+				align-items: center;
+				justify-content: center;
+
+				&:focus,
+				&:hover {
+					box-shadow: 0 0 0 1px rgba(#007cba, 1);
+				}
+			}
+
+			.slick-prev {
+				left: -3.75rem;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			.slick-next {
+				right: -3.75rem;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			.slick-dots {
+				list-style: none;
+				display: flex !important;
+				margin: 0 auto;
+				width: max-content;
+
+				li {
+					width: 12.5px;
+					height: 12.5px;
+
+					&:not(:last-child) {
+						margin-right: 0.5rem;
+					}
+
+					&.slick-active {
+						button {
+							background-color: darken(#ddd, 5);
+						}
+					}
+
+					button {
+						background-color: #ddd;
+						color: transparent;
+						display: block;
+						border-radius: 100px;
+						border: none;
+						height: 100%;
+						width: 100%;
+						cursor: pointer;
+						outline: none;
+
+						&:focus {
+							box-shadow: 0 0 0 1px rgba(#007cba, 1);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&__footer {
+		padding: 1rem;
+		border: 1px solid #ddd;
+		text-align: center;
+	}
 }
 
 .wp-block-create-block-block-slider-slide {

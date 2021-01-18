@@ -71,6 +71,7 @@ const CardGallery = ({ block }) => {
 														muted
 														autoPlay
 														loop
+														playsInline
 													/>
 												)}
 											</div>

@@ -57,6 +57,79 @@
 .wp-block-create-block-block-slider {
   padding: 3rem;
 }
+.wp-block-create-block-block-slider__header {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.wp-block-create-block-block-slider__body {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  background: #fff;
+  margin-bottom: 2rem;
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-arrow {
+  display: block;
+  position: absolute;
+  z-index: 10;
+  border-radius: 100px;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 1px #007cba;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-arrow:focus, .wp-block-create-block-block-slider__body .slick-slider .slick-arrow:hover {
+  box-shadow: 0 0 0 1px #007cba;
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-prev {
+  left: -3.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-next {
+  right: -3.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-dots {
+  list-style: none;
+  display: flex !important;
+  margin: 0 auto;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-dots li {
+  width: 12.5px;
+  height: 12.5px;
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-dots li:not(:last-child) {
+  margin-right: 0.5rem;
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-dots li.slick-active button {
+  background-color: #d0d0d0;
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-dots li button {
+  background-color: #ddd;
+  color: transparent;
+  display: block;
+  border-radius: 100px;
+  border: none;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+}
+.wp-block-create-block-block-slider__body .slick-slider .slick-dots li button:focus {
+  box-shadow: 0 0 0 1px #007cba;
+}
+.wp-block-create-block-block-slider__footer {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  text-align: center;
+}
 /* Color Options
 --------------------------------------------- */
 .has-light-blue-color {

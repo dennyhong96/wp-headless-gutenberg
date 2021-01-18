@@ -1,34 +1,33 @@
 {
-  "name": "lilo",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "svg": "svgr -d src/components/icons src/components/icons/svg"
-  },
-  "dependencies": {
-    "@wordpress/base-styles": "^3.3.0",
-    "classnames": "^2.2.6",
-    "cors": "^2.8.5",
-    "dompurify": "^2.2.6",
-    "graphql": "^15.4.0",
-    "graphql-request": "^3.4.0",
-    "gsap": "^3.5.1",
-    "html-to-react": "^1.4.5",
-    "nanoid": "^3.1.20",
-    "next": "10.0.4",
-    "next-seo": "^4.17.0",
-    "nprogress": "^0.2.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "reset-css": "^5.0.1",
-    "striptags": "^3.1.1",
-    "swr": "^0.3.11"
-  },
-  "devDependencies": {
-    "@svgr/cli": "^5.5.0",
-    "sass": "^1.30.0"
-  }
+	"name": "headless-frontend",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"svg": "svgr -d src/components/icons src/components/icons/svg"
+	},
+	"dependencies": {
+		"classnames": "^2.2.6",
+		"cors": "^2.8.5",
+		"graphql": "^15.4.0",
+		"graphql-request": "^3.4.0",
+		"gsap": "^3.5.1",
+		"html-to-react": "^1.4.5",
+		"nanoid": "^3.1.20",
+		"next": "10.0.4",
+		"next-seo": "^4.17.0",
+		"nprogress": "^0.2.0",
+		"react": "17.0.1",
+		"react-dom": "17.0.1",
+		"react-slick": "^0.27.14",
+		"sanitize-html": "^2.3.0",
+		"striptags": "^3.1.1",
+		"swr": "^0.3.11"
+	},
+	"devDependencies": {
+		"@svgr/cli": "^5.5.0",
+		"sass": "^1.30.0"
+	}
 }

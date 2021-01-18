@@ -65,6 +65,20 @@ export const GET_PAGE = gql`
 						}
 					}
 				}
+
+				# SLIDER
+				... on CreateBlockBlockSliderBlock {
+					attributes {
+						... on CreateBlockBlockSliderBlockAttributes {
+							slides
+							enableSliderHeader
+							header
+							footer
+							backgroundColor
+							customBackgroundColor
+						}
+					}
+				}
 			}
 		}
 	}
